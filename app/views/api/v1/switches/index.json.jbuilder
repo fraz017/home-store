@@ -1,0 +1,1 @@
+json.array! @api_v1_switches, partial: 'api_v1_switches/api_v1_switch', as: :api_v1_switch

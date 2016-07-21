@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  namespace :api do
-    scope :v1 do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  namespace :api, constraints: { format: 'json' } do
+    namespace :v1 do
       mount_devise_token_auth_for "User", at: 'auth'
+      resources :rooms
+      resources :switches
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
