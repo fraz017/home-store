@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   namespace :api, constraints: { format: 'json' } do
     namespace :v1 do
-      mount_devise_token_auth_for "User", at: 'auth'
-      resources :rooms
-      resources :switches
+      mount_devise_token_auth_for "User", at: 'auth', controllers: {
+        registrations:  'overrides/registrations',
+        sessions: 'overrides/sessions'
+      }
+      resources :products do 
+        collection do
+          get "/my_products", action: "my_products", :defaults => { :format => :json }
+        end
+      end
+      resources :sub_categories
+      resources :categories
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

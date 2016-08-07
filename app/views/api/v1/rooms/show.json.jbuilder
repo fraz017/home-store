@@ -1,1 +1,0 @@
-json.partial! "api_v1_room", room: @room
