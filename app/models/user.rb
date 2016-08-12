@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
-          :omniauthable
+          :omniauthable, :confirmable
   include DeviseTokenAuth::Concerns::User
   as_enum :role, admin: 0, seller: 1, buyer: 2
 
@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   has_many :products
+  validates_presence_of :first_name, :last_name, :mobile_number
 end

@@ -29,7 +29,8 @@ gem 'omniauth'
 gem 'rack-cors', :require => 'rack/cors'
 gem "paperclip", "~> 5.0.0"
 gem 'simple_enum'
-
+gem 'mailcatcher'
+gem 'sinch_sms'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

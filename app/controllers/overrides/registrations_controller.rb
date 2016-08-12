@@ -8,8 +8,8 @@ module Overrides
           success: true,
           data: {
             email: @resource.email,
-            name: @resource.name,
-            nickname: @resource.nickname,
+            first_name: @resource.first_name,
+            last_name: @resource.last_name,
             image: @resource.image.url 
           }
         }
@@ -23,8 +23,8 @@ module Overrides
           success: true,
           data: {
             email: @resource.email,
-            name: @resource.name,
-            nickname: @resource.nickname,
+            first_name: @resource.first_name,
+            last_name: @resource.last_name,
             image: @resource.image.url 
           }
         }
