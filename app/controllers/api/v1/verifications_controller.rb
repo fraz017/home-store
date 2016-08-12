@@ -16,9 +16,8 @@ class Api::V1::VerificationsController < Api::V1::ApiController
   
   def verify_code
     code = params[:code]
-    verification = current_api_v1_user.where(code: code).first
-    if verification.present?
-      verification.update(is_verified: true)
+    if current_api_v1_user.verification_code == code
+      current_api_v1_user.update(is_verified: true)
       render status: 200, json: {verified: true}.to_json
     else
       render status: 200, json: {verified: false}.to_json

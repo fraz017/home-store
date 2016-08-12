@@ -7,10 +7,7 @@ module Overrides
         render json: {
           success: true,
           data: {
-            email: @resource.email,
-            first_name: @resource.first_name,
-            last_name: @resource.last_name,
-            image: @resource.image.url 
+            @resource 
           }
         }
       end
@@ -22,10 +19,7 @@ module Overrides
         render json: {
           success: true,
           data: {
-            email: @resource.email,
-            first_name: @resource.first_name,
-            last_name: @resource.last_name,
-            image: @resource.image.url 
+            @resource 
           }
         }
       end

@@ -6,12 +6,7 @@ module Overrides
       if @resource
         render json: {
           success: true,
-          data: {
-            email: @resource.email,
-            first_name: @resource.first_name,
-            last_name: @resource.last_name,
-            image: @resource.image.url 
-          }
+          data: @resource 
         }
       end
     end

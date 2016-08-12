@@ -11,4 +11,9 @@ class User < ActiveRecord::Base
 
   has_many :products
   validates_presence_of :first_name, :last_name, :mobile_number
+
+  def as_json(options={})
+    super(:except => [:provider, :created_at, :updated_at, :role, :role_cd, :image_file_name, :image_content_type, :image_file_size, :image_updated_at, :verification_code, :message_id],
+    ).merge({:image => self.image.url})
+  end
 end
