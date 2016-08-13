@@ -34,6 +34,15 @@ class Api::V1::ProductsController < Api::V1::ApiController
     @product.user = current_api_v1_user
     respond_to do |format|
       if @product.save
+        params[:product][:properties].each do |k,v|
+          @product.product_properties.create(property: Property.find(k), value: v)
+        end
+        params[:product][:colors].each do |c|
+          @product.colors.create(name: c[:name].downcase, code: c[:code])
+        end
+        params[:product][:photos].each do |c|
+          @product.photos.create(image: c)
+        end
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created}
       else
@@ -75,6 +84,6 @@ class Api::V1::ProductsController < Api::V1::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :sub_category_id, :quantity, :user_id, :image)
+      params.require(:product).permit(:name, :sub_category_id, :user_id, :availablity, :price, :condition, :description, :specification, :sku, :details, :photos, :colors, :properties)
     end
 end

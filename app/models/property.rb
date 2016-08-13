@@ -5,4 +5,7 @@ class Property < ActiveRecord::Base
 	def as_json(options={})
     super(:except => [:created_at, :updated_at])
   end
+
+  has_many :product_properties
+  has_many :products, through: :product_properties
 end

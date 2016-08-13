@@ -1,5 +1,5 @@
 class SubCategory < ActiveRecord::Base
-	has_many :products, dependant: :destroy
+	has_many :products, dependent: :destroy
 	belongs_to :category
 	validates_associated :category
 	validates_presence_of :name
