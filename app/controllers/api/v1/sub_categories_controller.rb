@@ -60,6 +60,7 @@ class Api::V1::SubCategoriesController < Api::V1::ApiController
   # DELETE /sub_categories/1
   # DELETE /sub_categories/1.json
   def destroy
+    @sub_category.properties.delete_all
     @sub_category.destroy
     respond_to do |format|
       format.html { redirect_to sub_categories_url, notice: 'Sub category was successfully destroyed.' }
