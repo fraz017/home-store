@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       end
       resources :sub_categories
       resources :categories
+      resources :properties
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

@@ -25,9 +25,11 @@ class Api::V1::SubCategoriesController < Api::V1::ApiController
   # POST /sub_categories.json
   def create
     @sub_category = SubCategory.new(sub_category_params)
-
     respond_to do |format|
       if @sub_category.save
+        params[:sub_category][:properties].each do |p|
+          @sub_category.properties << Property.find(p)
+        end
         format.html { redirect_to @sub_category, notice: 'Sub category was successfully created.' }
         format.json { render :show, status: :created }
       else
@@ -42,6 +44,10 @@ class Api::V1::SubCategoriesController < Api::V1::ApiController
   def update
     respond_to do |format|
       if @sub_category.update(sub_category_params)
+        @sub_category.properties.delete_all
+        params[:sub_category][:properties].each do |p|
+          @sub_category.properties << Property.find(p)
+        end
         format.html { redirect_to @sub_category, notice: 'Sub category was successfully updated.' }
         format.json { render :show, status: :ok }
       else
@@ -69,6 +75,6 @@ class Api::V1::SubCategoriesController < Api::V1::ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sub_category_params
-      params.require(:sub_category).permit(:name, :category_id)
+      params.require(:sub_category).permit(:name, :category_id, :properties)
     end
 end
