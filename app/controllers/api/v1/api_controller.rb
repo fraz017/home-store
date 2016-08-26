@@ -6,8 +6,9 @@ class Api::V1::ApiController < ApplicationController
 
   def current_order
     if current_api_v1_user.present?
-      if current_api_v1_user.orders.last
-    		current_api_v1_user.orders.last	
+      order = current_api_v1_user.orders.where(order_status_id: 1).last
+      if order.present?
+    		order	
 	    else
 	      current_api_v1_user.orders.create
 	    end

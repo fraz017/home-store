@@ -1,0 +1,7 @@
+development:
+  paystack_public_key: 'pk_test_72754bb433356a65fd37ce9abf8ced7871513148'
+  paystack_private_key: 'sk_test_6a04b1699041e03b3d8238d265b1f1aa29793f1a'
+
+production:
+  paystack_public_key: 'pk_test_72754bb433356a65fd37ce9abf8ced7871513148'
+  paystack_private_key: 'sk_test_6a04b1699041e03b3d8238d265b1f1aa29793f1a'

@@ -21,6 +21,12 @@ module HomeStore
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
+
+    config_keys = File.join(Rails.root, 'config', 'config.yml')
+    CONFIG = HashWithIndifferentAccess.new(YAML::load(IO.read(config_keys)))[Rails.env]
+    CONFIG.each do |k,v|
+      ENV[k.upcase] ||= v
+    end
     config.active_record.raise_in_transactional_callbacks = true
     config.middleware.use Rack::Cors do
       allow do

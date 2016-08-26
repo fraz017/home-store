@@ -13,7 +13,7 @@ Rails.application.routes.draw do
           get "/my_products", action: "my_products", :defaults => { :format => :json }
         end
       end
-
+      post '/verify_transaction' => 'orders#verify'
       post '/add_to_cart' => 'order_items#create'
       put '/increase_quantity' => 'order_items#update'
       put '/decrease_quantity' => 'order_items#update'

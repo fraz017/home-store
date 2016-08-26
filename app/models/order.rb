@@ -4,9 +4,9 @@ class Order < ActiveRecord::Base
   has_many :order_items, dependent: :destroy
   before_create :set_order_status
   before_save :update_subtotal, :update_total
-  has_one :billing_address
-  has_one :shipping_address
-
+  has_one :billing_address, dependent: :destroy
+  has_one :shipping_address, dependent: :destroy
+  has_many :transactions, dependent: :destroy
 
   def subtotal
     order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
