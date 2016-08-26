@@ -19,8 +19,8 @@ class Api::V1::ProductsController < Api::V1::ApiController
   end
 
   def my_products
-    @product = current_api_v1_user.products
-    render :index, location: @products
+    @products = current_api_v1_user.products
+    render :index
   end
 
   # GET /products/1/edit
@@ -34,13 +34,13 @@ class Api::V1::ProductsController < Api::V1::ApiController
     @product.user = current_api_v1_user
     respond_to do |format|
       if @product.save
-        params[:product][:properties].each do |k,v|
+        params[:product][:properties].try(:each) do |k,v|
           @product.product_properties.create(property: Property.find(k), value: v)
         end
-        params[:product][:colors].each do |c|
+        params[:product][:colors].try(:each) do |c|
           @product.colors.create(name: c[:name].downcase, code: c[:code])
         end
-        params[:product][:photos].each do |c|
+        params[:product][:photos].try(:each) do |c|
           @product.photos.create(image: c)
         end
         format.html { redirect_to @product, notice: 'Product was successfully created.' }

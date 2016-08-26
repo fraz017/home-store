@@ -27,7 +27,7 @@ class Api::V1::SubCategoriesController < Api::V1::ApiController
     @sub_category = SubCategory.new(sub_category_params)
     respond_to do |format|
       if @sub_category.save
-        params[:sub_category][:properties].each do |p|
+        params[:sub_category][:properties].try(:each) do |p|
           @sub_category.properties << Property.find(p)
         end
         format.html { redirect_to @sub_category, notice: 'Sub category was successfully created.' }
@@ -45,7 +45,7 @@ class Api::V1::SubCategoriesController < Api::V1::ApiController
     respond_to do |format|
       if @sub_category.update(sub_category_params)
         @sub_category.properties.delete_all
-        params[:sub_category][:properties].each do |p|
+        params[:sub_category][:properties].try(:each) do |p|
           @sub_category.properties << Property.find(p)
         end
         format.html { redirect_to @sub_category, notice: 'Sub category was successfully updated.' }
